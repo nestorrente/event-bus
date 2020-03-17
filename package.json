@@ -1,6 +1,6 @@
 {
 	"name": "@nestorrente/event-bus",
-	"version": "0.1.1",
+	"version": "1.0.0",
 	"description": "",
 	"main": "dist/event-bus.js",
 	"module": "dist/event-bus.esm.js",
