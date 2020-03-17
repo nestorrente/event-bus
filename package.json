@@ -1,0 +1,35 @@
+{
+	"name": "@nestorrente/event-bus",
+	"version": "0.1.1",
+	"description": "",
+	"main": "dist/event-bus.js",
+	"module": "dist/event-bus.esm.js",
+	"types": "dist/index.d.ts",
+	"scripts": {
+		"test": "jest --config jestconfig.json",
+		"build": "webpack",
+		"format": "prettier --write \"src/**/*.ts\" \"src/**/*.js\"",
+		"lint": "tslint -p tsconfig.json"
+	},
+	"keywords": [],
+	"author": "",
+	"license": "MIT",
+	"devDependencies": {
+		"@types/jest": "^25.1.4",
+		"jest": "^25.1.0",
+		"prettier": "^1.19.1",
+		"ts-jest": "^25.2.1",
+		"ts-loader": "^6.2.1",
+		"tslint": "^6.0.0",
+		"tslint-config-prettier": "^1.18.0",
+		"typescript": "^3.8.3",
+		"webpack": "^4.42.0",
+		"webpack-cli": "^3.3.11"
+	},
+	"files": [
+		"dist/**/*"
+	],
+	"dependencies": {
+		"@types/node": "^13.9.0"
+	}
+}
