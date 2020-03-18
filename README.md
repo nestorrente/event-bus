@@ -32,10 +32,20 @@ import EventBus from '@nestorrente/event-bus';
 
 ### Using `<script>` tag
 
-You can [download latest version from here](https://combinatronics.com/nestorrente/event-bus/master/dist/event-bus.js). Then, you can use it as any other JavaScript file:
+You can [download latest version from here](dist/event-bus.js). Then, you can use it as any other JavaScript file:
 
 ```html
 <script src="event-bus.js"></script>
+```
+
+If you prefer, you can use any of the following CDN repositories:
+
+```html
+<!-- Unpkg -->
+<script src="https://unpkg.com/@nestorrente/event-bus@1.0.1/dist/event-bus.js"></script>
+
+<!-- JsDelivr -->
+<script src="https://cdn.jsdelivr.net/npm/@nestorrente/event-bus@1.0.1/dist/event-bus.js"></script>
 ```
 
 ## Usage
