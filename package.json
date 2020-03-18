@@ -1,6 +1,6 @@
 {
 	"name": "@nestorrente/event-bus",
-	"version": "1.0.2",
+	"version": "1.0.3",
 	"description": "Simple EventBus for triggering and listening to events in JavaScript and TypeScript",
 	"main": "dist/event-bus.js",
 	"module": "dist/event-bus.esm.js",
