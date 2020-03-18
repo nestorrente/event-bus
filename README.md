@@ -42,10 +42,10 @@ If you prefer, you can use any of the following CDN repositories:
 
 ```html
 <!-- Unpkg -->
-<script src="https://unpkg.com/@nestorrente/event-bus/dist/event-bus.js"></script>
+<script src="https://unpkg.com/@nestorrente/event-bus"></script>
 
 <!-- JsDelivr -->
-<script src="https://cdn.jsdelivr.net/npm/@nestorrente/event-bus/dist/event-bus.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@nestorrente/event-bus"></script>
 ```
 
 ## Usage
