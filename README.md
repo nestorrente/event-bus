@@ -1,6 +1,6 @@
 # EventBus
 
-This class allows you to trigger and listen events in JavaScript and TypeScript.
+This class allows you to trigger and listen to events in JavaScript and TypeScript.
 
 ## Table of contents
 
@@ -18,7 +18,7 @@ This class allows you to trigger and listen events in JavaScript and TypeScript.
 
 ### Using NPM
 
-Install latest stable version...
+Install the latest stable version...
 
 ```bash
 npm install --save @nestorrente/event-bus
@@ -32,7 +32,7 @@ import EventBus from '@nestorrente/event-bus';
 
 ### Using `<script>` tag
 
-You can [download latest version from here](dist/event-bus.js). Then, you can use it as any other JavaScript file:
+You can [download the latest version from here](dist/event-bus.js). Then, you can use it as any other JavaScript file:
 
 ```html
 <script src="event-bus.js"></script>
@@ -93,7 +93,7 @@ off(event: string, listener?: (...args: any[]) => void): EventBus;
 
 Unregisters an event handler for the specified event.
 
-If `listener` parameter is not specified, all event handlers registered for the specified event are unregistered.
+If `listener` parameter is not specified, **all event handlers** registered for the specified event are **unregistered**.
 
 **Usage example:**
 
@@ -119,7 +119,7 @@ eventBus.off('my-event');
 once(event: string, listener: (...args: any[]) => void): EventBus;
 ```
 
-Registers an event handler function that will be called at most once for the specified event.
+Registers an event handler function that will be called **at most once** for the specified event.
 
 This method receives the same parameters as [`on()`](#on).
 
@@ -137,7 +137,7 @@ eventBus.once('my-event', (param1, param2, /* ... more params... */) => {
 trigger(event: string, ...eventParameters: any[]): EventBus;
 ```
 
-Invokes all event handlers registered for the specified event. You can pass any number of parameters of any type.
+Invokes all event handlers registered for the specified event. You can pass **any number of parameters** of any type.
 
 **Usage example:**
 
