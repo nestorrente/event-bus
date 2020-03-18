@@ -1,9 +1,193 @@
 /*!
- * EventBus v1.0.3
+ * EventBus v1.0.4
  * https://github.com/nestorrente/event-bus
  * 
  * Released under the MIT License.
  * 
- * Build date: 2020-03-18T19:04:03.415Z
- */!function(e){var t={};function r(n){if(t[n])return t[n].exports;var o=t[n]={i:n,l:!1,exports:{}};return e[n].call(o.exports,o,o.exports,r),o.l=!0,o.exports}r.m=e,r.c=t,r.d=function(e,t,n){r.o(e,t)||Object.defineProperty(e,t,{enumerable:!0,get:n})},r.r=function(e){"undefined"!=typeof Symbol&&Symbol.toStringTag&&Object.defineProperty(e,Symbol.toStringTag,{value:"Module"}),Object.defineProperty(e,"__esModule",{value:!0})},r.t=function(e,t){if(1&t&&(e=r(e)),8&t)return e;if(4&t&&"object"==typeof e&&e&&e.__esModule)return e;var n=Object.create(null);if(r.r(n),Object.defineProperty(n,"default",{enumerable:!0,value:e}),2&t&&"string"!=typeof e)for(var o in e)r.d(n,o,function(t){return e[t]}.bind(null,o));return n},r.n=function(e){var t=e&&e.__esModule?function(){return e.default}:function(){return e};return r.d(t,"a",t),t},r.o=function(e,t){return Object.prototype.hasOwnProperty.call(e,t)},r.p="",r(r.s=0)}([function(e,t,r){"use strict";r.r(t);var n=function(){function e(){this.listeners={}}return e.prototype.on=function(e,t){return this.listeners.hasOwnProperty(e)||(this.listeners[e]=[]),this.listeners[e].push(t),this},e.prototype.off=function(e,t){return this.listeners.hasOwnProperty(e)&&(void 0===t?this.removeAllListeners(e):this.removeListener(e,t)),this},e.prototype.removeListener=function(e,t){var r=this.listeners[e].indexOf(t);-1!==r&&this.listeners[e].splice(r,1),this.removeListenersArrayIfEmpty(e)},e.prototype.removeAllListeners=function(e){delete this.listeners[e]},e.prototype.removeListenersArrayIfEmpty=function(e){0===this.listeners[e].length&&this.removeAllListeners(e)},e.prototype.once=function(e,t){var r=this,n=function(){for(var o=[],i=0;i<arguments.length;i++)o[i]=arguments[i];t.apply(void 0,o),r.off(e,n)};return this.on(e,n)},e.prototype.trigger=function(e){for(var t=[],r=1;r<arguments.length;r++)t[r-1]=arguments[r];if(this.listeners.hasOwnProperty(e))for(var n=0,o=this.listeners[e];n<o.length;n++){var i=o[n];try{i.apply(void 0,t)}catch(e){console.error(e)}}return this},e}();t.default=n}]);
+ * Build date: 2020-03-18T23:08:00.584Z
+ */
+(function webpackUniversalModuleDefinition(root, factory) {
+	if(typeof exports === 'object' && typeof module === 'object')
+		module.exports = factory();
+	else if(typeof define === 'function' && define.amd)
+		define([], factory);
+	else {
+		var a = factory();
+		for(var i in a) (typeof exports === 'object' ? exports : root)[i] = a[i];
+	}
+})(window, function() {
+return /******/ (function(modules) { // webpackBootstrap
+/******/ 	// The module cache
+/******/ 	var installedModules = {};
+/******/
+/******/ 	// The require function
+/******/ 	function __webpack_require__(moduleId) {
+/******/
+/******/ 		// Check if module is in cache
+/******/ 		if(installedModules[moduleId]) {
+/******/ 			return installedModules[moduleId].exports;
+/******/ 		}
+/******/ 		// Create a new module (and put it into the cache)
+/******/ 		var module = installedModules[moduleId] = {
+/******/ 			i: moduleId,
+/******/ 			l: false,
+/******/ 			exports: {}
+/******/ 		};
+/******/
+/******/ 		// Execute the module function
+/******/ 		modules[moduleId].call(module.exports, module, module.exports, __webpack_require__);
+/******/
+/******/ 		// Flag the module as loaded
+/******/ 		module.l = true;
+/******/
+/******/ 		// Return the exports of the module
+/******/ 		return module.exports;
+/******/ 	}
+/******/
+/******/
+/******/ 	// expose the modules object (__webpack_modules__)
+/******/ 	__webpack_require__.m = modules;
+/******/
+/******/ 	// expose the module cache
+/******/ 	__webpack_require__.c = installedModules;
+/******/
+/******/ 	// define getter function for harmony exports
+/******/ 	__webpack_require__.d = function(exports, name, getter) {
+/******/ 		if(!__webpack_require__.o(exports, name)) {
+/******/ 			Object.defineProperty(exports, name, { enumerable: true, get: getter });
+/******/ 		}
+/******/ 	};
+/******/
+/******/ 	// define __esModule on exports
+/******/ 	__webpack_require__.r = function(exports) {
+/******/ 		if(typeof Symbol !== 'undefined' && Symbol.toStringTag) {
+/******/ 			Object.defineProperty(exports, Symbol.toStringTag, { value: 'Module' });
+/******/ 		}
+/******/ 		Object.defineProperty(exports, '__esModule', { value: true });
+/******/ 	};
+/******/
+/******/ 	// create a fake namespace object
+/******/ 	// mode & 1: value is a module id, require it
+/******/ 	// mode & 2: merge all properties of value into the ns
+/******/ 	// mode & 4: return value when already ns object
+/******/ 	// mode & 8|1: behave like require
+/******/ 	__webpack_require__.t = function(value, mode) {
+/******/ 		if(mode & 1) value = __webpack_require__(value);
+/******/ 		if(mode & 8) return value;
+/******/ 		if((mode & 4) && typeof value === 'object' && value && value.__esModule) return value;
+/******/ 		var ns = Object.create(null);
+/******/ 		__webpack_require__.r(ns);
+/******/ 		Object.defineProperty(ns, 'default', { enumerable: true, value: value });
+/******/ 		if(mode & 2 && typeof value != 'string') for(var key in value) __webpack_require__.d(ns, key, function(key) { return value[key]; }.bind(null, key));
+/******/ 		return ns;
+/******/ 	};
+/******/
+/******/ 	// getDefaultExport function for compatibility with non-harmony modules
+/******/ 	__webpack_require__.n = function(module) {
+/******/ 		var getter = module && module.__esModule ?
+/******/ 			function getDefault() { return module['default']; } :
+/******/ 			function getModuleExports() { return module; };
+/******/ 		__webpack_require__.d(getter, 'a', getter);
+/******/ 		return getter;
+/******/ 	};
+/******/
+/******/ 	// Object.prototype.hasOwnProperty.call
+/******/ 	__webpack_require__.o = function(object, property) { return Object.prototype.hasOwnProperty.call(object, property); };
+/******/
+/******/ 	// __webpack_public_path__
+/******/ 	__webpack_require__.p = "";
+/******/
+/******/
+/******/ 	// Load entry module and return exports
+/******/ 	return __webpack_require__(__webpack_require__.s = 0);
+/******/ })
+/************************************************************************/
+/******/ ([
+/* 0 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+// ESM COMPAT FLAG
+__webpack_require__.r(__webpack_exports__);
+
+// CONCATENATED MODULE: ./src/EventBus.ts
+var EventBus = /** @class */ (function () {
+    function EventBus() {
+        this.listeners = {};
+    }
+    EventBus.prototype.on = function (event, listener) {
+        if (!this.listeners.hasOwnProperty(event)) {
+            this.listeners[event] = [];
+        }
+        this.listeners[event].push(listener);
+        return this;
+    };
+    EventBus.prototype.off = function (event, listener) {
+        if (this.listeners.hasOwnProperty(event)) {
+            if (listener === undefined) {
+                this.removeAllListeners(event);
+            }
+            else {
+                this.removeListener(event, listener);
+            }
+        }
+        return this;
+    };
+    EventBus.prototype.removeListener = function (event, listener) {
+        var index = this.listeners[event].indexOf(listener);
+        if (index !== -1) {
+            this.listeners[event].splice(index, 1);
+        }
+        this.removeListenersArrayIfEmpty(event);
+    };
+    EventBus.prototype.removeAllListeners = function (event) {
+        delete this.listeners[event];
+    };
+    EventBus.prototype.removeListenersArrayIfEmpty = function (event) {
+        if (this.listeners[event].length === 0) {
+            this.removeAllListeners(event);
+        }
+    };
+    EventBus.prototype.once = function (event, listener) {
+        var _this = this;
+        var onceListener = function () {
+            var args = [];
+            for (var _i = 0; _i < arguments.length; _i++) {
+                args[_i] = arguments[_i];
+            }
+            listener.apply(void 0, args);
+            _this.off(event, onceListener);
+        };
+        return this.on(event, onceListener);
+    };
+    EventBus.prototype.trigger = function (event) {
+        var eventParameters = [];
+        for (var _i = 1; _i < arguments.length; _i++) {
+            eventParameters[_i - 1] = arguments[_i];
+        }
+        if (this.listeners.hasOwnProperty(event)) {
+            for (var _a = 0, _b = this.listeners[event]; _a < _b.length; _a++) {
+                var listener = _b[_a];
+                try {
+                    listener.apply(void 0, eventParameters);
+                }
+                catch (e) {
+                    console.error(e);
+                }
+            }
+        }
+        return this;
+    };
+    return EventBus;
+}());
+/* harmony default export */ var src_EventBus = (EventBus);
+
+// CONCATENATED MODULE: ./src/index.ts
+
+/* harmony default export */ var src = __webpack_exports__["default"] = (src_EventBus);
+
+
+/***/ })
+/******/ ]);
+});
 //# sourceMappingURL=event-bus.esm.js.map

@@ -2,7 +2,7 @@ const webpack = require('webpack');
 const path = require('path');
 
 const BUNDLE_HEADER = `
-EventBus v1.0.3
+EventBus v1.0.4
 https://github.com/nestorrente/event-bus
 
 Released under the MIT License.
@@ -49,9 +49,14 @@ const standaloneConfig = {
 
 const moduleConfig = {
 	...commonConfig,
+	optimization: {
+		minimize: false
+	},
 	output: {
 		...commonConfig.output,
-		filename: 'event-bus.esm.js'
+		filename: 'event-bus.esm.js',
+		// library: 'EventBus',
+		libraryTarget: 'umd'
 	}
 };
 
