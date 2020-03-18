@@ -2,7 +2,7 @@ const webpack = require('webpack');
 const path = require('path');
 
 const BUNDLE_HEADER = `
-EventBus v1.0.1
+EventBus v1.0.2
 https://github.com/nestorrente/event-bus
 
 Released under the MIT License.

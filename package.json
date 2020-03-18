@@ -1,7 +1,7 @@
 {
 	"name": "@nestorrente/event-bus",
 	"version": "1.0.2",
-	"description": "",
+	"description": "Simple EventBus for triggering and listening to events in JavaScript and TypeScript",
 	"main": "dist/event-bus.js",
 	"module": "dist/event-bus.esm.js",
 	"types": "dist/index.d.ts",
@@ -15,6 +15,7 @@
 	"author": "",
 	"license": "MIT",
 	"devDependencies": {
+		"@types/node": "^13.9.0",
 		"@types/jest": "^25.1.4",
 		"jest": "^25.1.0",
 		"prettier": "^1.19.1",
@@ -28,8 +29,5 @@
 	},
 	"files": [
 		"dist/**/*"
-	],
-	"dependencies": {
-		"@types/node": "^13.9.0"
-	}
+	]
 }
