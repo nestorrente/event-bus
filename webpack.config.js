@@ -40,7 +40,7 @@ const standaloneConfig = {
 	...commonConfig,
 	output: {
 		...commonConfig.output,
-		filename: `event-bus.js`,
+		filename: 'event-bus.js',
 		library: 'EventBus',
 		libraryTarget: 'var',
 		libraryExport: 'default'
@@ -51,7 +51,7 @@ const moduleConfig = {
 	...commonConfig,
 	output: {
 		...commonConfig.output,
-		filename: `event-bus.esm.js`,
+		filename: 'event-bus.esm.js',
 	}
 };
 
