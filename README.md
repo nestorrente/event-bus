@@ -50,6 +50,11 @@ eventBus.on('my-event', (param1, param2) => {
 eventBus.trigger('my-event', 1, 'two');
 // console will display:
 // > Event received with params "1" and "two"
+
+// You can also chain method calls
+eventBus.on('my-event', () => { /* do nothing */ })
+        .trigger('my-event')
+        .off('my-event');
 ```
 
 ## Method reference
