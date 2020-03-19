@@ -4,8 +4,8 @@ export default class EventBus {
     on(event: string, listener: Listener): EventBus;
     off(event: string, listener?: Listener): EventBus;
     private removeListener;
-    private removeAllListeners;
     private removeListenersArrayIfEmpty;
+    private removeAllListeners;
     once(event: string, listener: Listener): EventBus;
     trigger(event: string, ...eventParameters: any[]): EventBus;
 }

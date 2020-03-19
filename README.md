@@ -38,14 +38,14 @@ You can [download the latest version from here](dist/event-bus.js). Then, you ca
 <script src="event-bus.js"></script>
 ```
 
-If you prefer, you can use any of the following CDN repositories:
+Or, if you prefer, you can use any of the following CDN repositories:
 
 ```html
 <!-- Unpkg -->
-<script src="https://unpkg.com/@nestorrente/event-bus"></script>
+<script src="https://unpkg.com/@nestorrente/event-bus@1.0.5"></script>
 
 <!-- JsDelivr -->
-<script src="https://cdn.jsdelivr.net/npm/@nestorrente/event-bus"></script>
+<script src="https://cdn.jsdelivr.net/npm/@nestorrente/event-bus@1.0.5"></script>
 ```
 
 ## Usage

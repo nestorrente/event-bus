@@ -1,6 +1,6 @@
 {
 	"name": "@nestorrente/event-bus",
-	"version": "1.0.4",
+	"version": "1.0.5",
 	"description": "Simple EventBus for triggering and listening to events in JavaScript and TypeScript",
 	"main": "dist/event-bus.js",
 	"module": "dist/event-bus.esm.js",
@@ -11,7 +11,16 @@
 		"format": "prettier --write \"src/**/*.ts\" \"src/**/*.js\"",
 		"lint": "tslint -p tsconfig.json"
 	},
-	"keywords": [],
+	"keywords": [
+		"event",
+		"bus",
+		"listener",
+		"event-bus",
+		"trigger",
+		"listen",
+		"emit",
+		"callback"
+	],
 	"author": "",
 	"license": "MIT",
 	"devDependencies": {

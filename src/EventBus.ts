@@ -19,10 +19,10 @@ export default class EventBus {
 	public off(event: string, listener?: Listener): EventBus {
 
 		if (this.listeners.hasOwnProperty(event)) {
-			if (listener === undefined) {
-				this.removeAllListeners(event);
-			} else {
+			if (listener !== undefined) {
 				this.removeListener(event, listener);
+			} else {
+				this.removeAllListeners(event);
 			}
 		}
 
@@ -42,14 +42,14 @@ export default class EventBus {
 
 	}
 
-	private removeAllListeners(event: string): void {
-		delete this.listeners[event];
-	}
-
 	private removeListenersArrayIfEmpty(event: string): void {
 		if (this.listeners[event].length === 0) {
 			this.removeAllListeners(event);
 		}
+	}
+
+	private removeAllListeners(event: string): void {
+		delete this.listeners[event];
 	}
 
 	public once(event: string, listener: Listener): EventBus {
