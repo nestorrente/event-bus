@@ -49,13 +49,9 @@ const standaloneConfig = {
 
 const moduleConfig = {
 	...commonConfig,
-	optimization: {
-		minimize: false
-	},
 	output: {
 		...commonConfig.output,
 		filename: 'event-bus.esm.js',
-		// library: 'EventBus',
 		libraryTarget: 'umd'
 	}
 };
