@@ -1,0 +1,8 @@
+/*!
+ * EventBus v1.0.5
+ * https://github.com/nestorrente/event-bus
+ *
+ * Released under the MIT License.
+ *
+ * Build date: 2023-02-05T00:28:53.630Z
+ */
