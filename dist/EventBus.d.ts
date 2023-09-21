@@ -1,7 +1,8 @@
 import { Listener } from './Listener';
-import { EventSource } from "./EventSource";
-import { EventEmitter } from "./EventEmitter";
-export default class EventBus implements EventEmitter, EventSource {
+import { EventSource } from './EventSource';
+import { EventEmitter } from './EventEmitter';
+import StringKeyOf from './StringKeyOf';
+export default class EventBus<ECM extends Record<string, any[]> = Record<string, any[]>> implements EventEmitter<ECM>, EventSource<ECM> {
     /**
      * We use a Map<Listener, Listener> because in some cases, like in the {@link once} method,
      * we will register a different listener that the one we received, but still want to be able
@@ -9,13 +10,13 @@ export default class EventBus implements EventEmitter, EventSource {
      * @private
      */
     private listeners;
-    on(event: string, listener: Listener): this;
+    on<E extends StringKeyOf<ECM>>(event: E, listener: Listener<ECM[E]>): this;
     private registerListener;
-    off(event: string, listener?: Listener): this;
+    off<E extends StringKeyOf<ECM>>(event: E, listener?: Listener<ECM[E]>): this;
     private unregisterListener;
     private removeListenersMapIfEmpty;
     private unregisterAllListeners;
-    once(event: string, listener: Listener): this;
-    trigger<A extends any[]>(event: string, ...eventParameters: A): this;
+    once<E extends StringKeyOf<ECM>>(event: E, listener: Listener<ECM[E]>): this;
+    trigger<E extends StringKeyOf<ECM>>(event: E, ...eventParameters: ECM[E]): this;
 }
 //# sourceMappingURL=EventBus.d.ts.map
