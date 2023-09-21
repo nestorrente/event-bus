@@ -1,13 +1,13 @@
 {
 	"name": "@nestorrente/event-bus",
-	"version": "1.2.1",
+	"version": "1.2.2",
 	"description": "Simple EventBus for triggering and listening to events in JavaScript and TypeScript",
 	"main": "dist/event-bus.js",
 	"module": "dist/event-bus.esm.js",
 	"types": "dist/index.d.ts",
 	"scripts": {
 		"test": "jest --config jest.config.js",
-		"build": "webpack",
+		"build": "rm -rf dist && webpack && rm -rf dist/__tests__",
 		"format": "prettier --write \"src/**/*.ts\" \"src/**/*.js\"",
 		"lint": "tslint -p tsconfig.json"
 	},
