@@ -1,8 +1,5 @@
 import EventBus from './EventBus';
-import {Listener} from './types';
-
-export {
-	Listener
-}
+export type {Listener} from './Listener';
+export type {EventSource} from './EventSource';
 
 export default EventBus;

@@ -75,7 +75,7 @@ eventBus.on('my-event', () => { /* do nothing */ })
 on(event: string, listener: (...args: any[]) => void): EventBus;
 ```
 
-Registers an event handler function for the specified event.
+Registers an event listener function for the specified event.
 
 **Usage example:**
 
@@ -91,14 +91,14 @@ eventBus.on('my-event', (param1, param2, /* ... more params... */) => {
 off(event: string, listener?: (...args: any[]) => void): EventBus;
 ```
 
-Unregisters an event handler for the specified event.
+Unregisters an event listener for the specified event.
 
-If `listener` parameter is not specified, **all event handlers** registered for the specified event are **unregistered**.
+If `listener` parameter is not specified, **all event listeners** registered for the specified event are **unregistered**.
 
 **Usage example:**
 
 ```javascript
-// Define an event handler...
+// Define an event listener...
 const myEventHandler = () => {
     console.log('Event triggered');
 };
@@ -109,7 +109,7 @@ eventBus.on('my-event', myEventHandler);
 // ... then remove it
 eventBus.off('my-event', myEventHandler);
 
-// This will remove all registered event handlers for 'my-event'
+// This will remove all registered event listeners for 'my-event'
 eventBus.off('my-event');
 ```
 
@@ -119,7 +119,7 @@ eventBus.off('my-event');
 once(event: string, listener: (...args: any[]) => void): EventBus;
 ```
 
-Registers an event handler function that will be called **at most once** for the specified event.
+Registers an event listener function that will be called **at most once** for the specified event.
 
 This method receives the same parameters as [`on()`](#on).
 
@@ -137,7 +137,7 @@ eventBus.once('my-event', (param1, param2, /* ... more params... */) => {
 trigger(event: string, ...eventParameters: any[]): EventBus;
 ```
 
-Invokes all event handlers registered for the specified event. You can pass **any number of parameters** of any type.
+Invokes all event listeners registered for the specified event. You can pass **any number of parameters** of any type.
 
 **Usage example:**
 

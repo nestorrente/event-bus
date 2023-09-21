@@ -1,28 +1,39 @@
-import {Dictionary, Listener} from './types';
+import {Listener} from './Listener';
+import {EventSource} from "./EventSource";
+import {EventEmitter} from "./EventEmitter";
 
-export default class EventBus {
+export default class EventBus implements EventEmitter, EventSource {
 
-	private listeners: Dictionary<Listener[]> = {};
+	/**
+	 * We use a Map<Listener, Listener> because in some cases, like in the {@link once} method,
+	 * we will register a different listener that the one we received, but still want to be able
+	 * to cancel it by calling {@link off} with the original listener.
+	 * @private
+	 */
+	private listeners: Record<string, Map<Listener, Listener>> = {};
 
-	public on(event: string, listener: Listener): EventBus {
+	public on(event: string, listener: Listener): this {
+		this.registerListener(event, listener, listener);
+		return this;
+	}
+
+	private registerListener(event: string, keyListener: Listener, realListener: Listener): void {
 
 		if (!this.listeners.hasOwnProperty(event)) {
-			this.listeners[event] = [];
+			this.listeners[event] = new Map();
 		}
 
-		this.listeners[event].push(listener);
-
-		return this;
+		this.listeners[event].set(keyListener, realListener);
 
 	}
 
-	public off(event: string, listener?: Listener): EventBus {
+	public off(event: string, listener?: Listener): this {
 
 		if (this.listeners.hasOwnProperty(event)) {
 			if (listener !== undefined) {
-				this.removeListener(event, listener);
+				this.unregisterListener(event, listener);
 			} else {
-				this.removeAllListeners(event);
+				this.unregisterAllListeners(event);
 			}
 		}
 
@@ -30,44 +41,44 @@ export default class EventBus {
 
 	}
 
-	private removeListener(event: string, listener: Listener): void {
+	private unregisterListener(event: string, listener: Listener): void {
 
-		const index = this.listeners[event].indexOf(listener);
+		const deleted = this.listeners[event].delete(listener);
 
-		if (index !== -1) {
-			this.listeners[event].splice(index, 1);
+		if (deleted) {
+			this.removeListenersMapIfEmpty(event);
 		}
-
-		this.removeListenersArrayIfEmpty(event);
 
 	}
 
-	private removeListenersArrayIfEmpty(event: string): void {
-		if (this.listeners[event].length === 0) {
-			this.removeAllListeners(event);
+	private removeListenersMapIfEmpty(event: string): void {
+		if (this.listeners[event].size === 0) {
+			this.unregisterAllListeners(event);
 		}
 	}
 
-	private removeAllListeners(event: string): void {
+	private unregisterAllListeners(event: string): void {
 		delete this.listeners[event];
 	}
 
-	public once(event: string, listener: Listener): EventBus {
+	public once(event: string, listener: Listener): this {
 
 		const onceListener: Listener = (...args: any[]) => {
 			listener(...args);
-			this.off(event, onceListener);
+			this.off(event, listener);
 		};
 
-		return this.on(event, onceListener);
+		this.registerListener(event, listener, onceListener);
+
+		return this;
 
 	}
 
-	public trigger(event: string, ...eventParameters: any[]): EventBus {
+	public trigger<A extends any[]>(event: string, ...eventParameters: A): this {
 
 		if (this.listeners.hasOwnProperty(event)) {
 
-			for (const listener of this.listeners[event]) {
+			for (const listener of this.listeners[event].values()) {
 				try {
 					listener(...eventParameters);
 				} catch (e) {
