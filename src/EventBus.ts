@@ -1,8 +1,10 @@
-import {Listener} from './Listener';
-import {EventSource} from "./EventSource";
-import {EventEmitter} from "./EventEmitter";
+import { Listener } from './Listener';
+import { EventSource } from './EventSource';
+import { EventEmitter } from './EventEmitter';
+import StringKeyOf from './StringKeyOf';
 
-export default class EventBus implements EventEmitter, EventSource {
+export default class EventBus<ECM extends Record<string, any[]> = Record<string, any[]>>
+		implements EventEmitter<ECM>, EventSource<ECM> {
 
 	/**
 	 * We use a Map<Listener, Listener> because in some cases, like in the {@link once} method,
@@ -10,14 +12,14 @@ export default class EventBus implements EventEmitter, EventSource {
 	 * to cancel it by calling {@link off} with the original listener.
 	 * @private
 	 */
-	private listeners: Record<string, Map<Listener, Listener>> = {};
+	private listeners: Record<string, Map<Listener<any>, Listener<any>>> = {};
 
-	public on(event: string, listener: Listener): this {
+	public on<E extends StringKeyOf<ECM>>(event: E, listener: Listener<ECM[E]>): this {
 		this.registerListener(event, listener, listener);
 		return this;
 	}
 
-	private registerListener(event: string, keyListener: Listener, realListener: Listener): void {
+	private registerListener<E extends StringKeyOf<ECM>>(event: E, keyListener: Listener<ECM[E]>, realListener: Listener<ECM[E]>): void {
 
 		if (!this.listeners.hasOwnProperty(event)) {
 			this.listeners[event] = new Map();
@@ -27,7 +29,7 @@ export default class EventBus implements EventEmitter, EventSource {
 
 	}
 
-	public off(event: string, listener?: Listener): this {
+	public off<E extends StringKeyOf<ECM>>(event: E, listener?: Listener<ECM[E]>): this {
 
 		if (this.listeners.hasOwnProperty(event)) {
 			if (listener !== undefined) {
@@ -41,7 +43,7 @@ export default class EventBus implements EventEmitter, EventSource {
 
 	}
 
-	private unregisterListener(event: string, listener: Listener): void {
+	private unregisterListener<E extends StringKeyOf<ECM>>(event: E, listener: Listener<ECM[E]>): void {
 
 		const deleted = this.listeners[event].delete(listener);
 
@@ -61,9 +63,9 @@ export default class EventBus implements EventEmitter, EventSource {
 		delete this.listeners[event];
 	}
 
-	public once(event: string, listener: Listener): this {
+	public once<E extends StringKeyOf<ECM>>(event: E, listener: Listener<ECM[E]>): this {
 
-		const onceListener: Listener = (...args: any[]) => {
+		const onceListener: Listener = (...args: any) => {
 			listener(...args);
 			this.off(event, listener);
 		};
@@ -74,7 +76,7 @@ export default class EventBus implements EventEmitter, EventSource {
 
 	}
 
-	public trigger<A extends any[]>(event: string, ...eventParameters: A): this {
+	public trigger<E extends StringKeyOf<ECM>>(event: E, ...eventParameters: ECM[E]): this {
 
 		if (this.listeners.hasOwnProperty(event)) {
 

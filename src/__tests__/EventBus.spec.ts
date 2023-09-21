@@ -2,13 +2,13 @@ import EventBus from '../EventBus';
 
 test('Triggering an event before registering any listener has no effect', () => {
 
-    const eventBus = new EventBus();
-    const listener = jest.fn();
+	const eventBus = new EventBus();
+	const listener = jest.fn();
 
-    eventBus.trigger('my-event');
-    eventBus.on('my-event', listener);
+	eventBus.trigger('my-event');
+	eventBus.on('my-event', listener);
 
-    expect(listener).not.toHaveBeenCalled();
+	expect(listener).not.toHaveBeenCalled();
 
 });
 
@@ -192,5 +192,78 @@ test('An error in a listener does not affect others', () => {
 	} finally {
 		global.console.error = originalConsoleError;
 	}
+
+});
+
+test.skip('The events and their parameters can be typed', () => {
+
+	const eventBus = new EventBus<{
+		'string-received': [string];
+		'number-received': [number];
+		'string-and-boolean-received': [string, boolean];
+		'nothing-received': [];
+	}>();
+
+	eventBus.on('string-received', value => {
+		value.toUpperCase();
+	});
+	eventBus.on('number-received', value => {
+		value.toFixed(2);
+	});
+	eventBus.on('string-and-boolean-received', (value1, value2) => {
+		value2 ? value1.toUpperCase() : value1.toLowerCase();
+	});
+	eventBus.once('nothing-received', () => void 0);
+
+	eventBus.on('string-received', value => {
+		// @ts-expect-error value must be a string
+		value.toFixed(2);
+	});
+	eventBus.on('number-received', value => {
+		// @ts-expect-error value must be a number
+		value.toUpperCase();
+	});
+	eventBus.on('string-and-boolean-received', (value1, value2) => {
+		// @ts-expect-error value1 must be a string
+		value.toFixed(2);
+		// @ts-expect-error value2 must be a boolean
+		value2.invalidMethod();
+	});
+
+	// @ts-expect-error at most 1 arg expected
+	eventBus.on('string-received', (_value1, _value2) => void 0);
+	// @ts-expect-error at most 1 arg expected
+	eventBus.on('number-received', (_value1, _value2) => void 0);
+	// @ts-expect-error at most 2 args expected
+	eventBus.on('string-and-boolean-received', (_value1, _value2, _value3) => void 0);
+	// @ts-expect-error no args expected
+	eventBus.once('nothing-received', (_value) => void 0);
+
+	eventBus.trigger('string-received', 'string');
+	eventBus.trigger('number-received', 42);
+	eventBus.trigger('string-and-boolean-received', 'string', true);
+	eventBus.trigger('nothing-received');
+
+	// @ts-expect-error value must be a string
+	eventBus.trigger('string-received', 42);
+	// @ts-expect-error value must be a number
+	eventBus.trigger('number-received', 'string');
+	// @ts-expect-error value1 must be a string
+	eventBus.trigger('string-and-boolean-received', true, true);
+	// @ts-expect-error value2 must be a boolean
+	eventBus.trigger('string-and-boolean-received', 'string', 'string');
+
+	const anyArg = '' as any;
+
+	// @ts-expect-error at most 1 arg expected
+	eventBus.trigger('string-received', anyArg, anyArg);
+	// @ts-expect-error at most 1 arg expected
+	eventBus.trigger('number-received', anyArg, anyArg);
+	// @ts-expect-error at most 2 args expected
+	eventBus.trigger('string-and-boolean-received', anyArg, anyArg, anyArg);
+	// @ts-expect-error no args expected
+	eventBus.trigger('nothing-received', anyArg);
+
+	// No assertions, just a compilation test
 
 });
